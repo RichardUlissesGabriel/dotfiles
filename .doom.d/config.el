@@ -2,12 +2,25 @@
 
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
-
+(let ((nudev-emacs-path "~/dev/nu/nudev/ides/emacs/"))
+  (when (file-directory-p nudev-emacs-path)
+    (add-to-list 'load-path nudev-emacs-path)
+    (require 'nu nil t)
+    (require 'nu-datomic-query nil t)))
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
 (setq user-full-name "John Doe"
-      user-mail-address "john@doe.com")
+      user-mail-address "john@doe.com"
+      history-length 300
+      indent-tabs-mode nil
+      confirm-kill-emacs nil
+      mode-line-default-help-echo nil
+      show-help-function nil
+      compilation-scroll-output 'first-error
+      read-process-output-max (* 1024 1024)
+      projectile-project-search-path '("~/dev/" "~/dev/nu/" "~/dev/nu/mini-meta-repo/packages")
+      doom-localleader-key ",")
 
 ;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
 ;; are the three important ones:
@@ -52,3 +65,4 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
+(load! "+bindings")
