@@ -22,6 +22,7 @@
       projectile-project-search-path '("~/dev/" "~/dev/nu/" "~/dev/nu/mini-meta-repo/packages")
       doom-localleader-key ",")
 
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
 ;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
 ;; are the three important ones:
 ;;
