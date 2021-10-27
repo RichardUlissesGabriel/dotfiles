@@ -20,7 +20,9 @@
       compilation-scroll-output 'first-error
       read-process-output-max (* 1024 1024)
       projectile-project-search-path '("~/dev/" "~/dev/nu/" "~/dev/nu/mini-meta-repo/packages")
-      doom-localleader-key ",")
+      doom-localleader-key ","
+      projectile-enable-caching nil
+      lsp-lens-enable t)
 
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 ;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
@@ -66,4 +68,14 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
+(use-package! lsp-ui
+  :after lsp-mode
+  :commands lsp-ui-mode
+  :config
+  (setq lsp-ui-peek-list-width 60
+        lsp-ui-doc-max-width 60
+        lsp-ui-doc-enable nil
+        lsp-ui-peek-fontify 'always
+        lsp-ui-sideline-show-code-actions nil))
+
 (load! "+bindings")
