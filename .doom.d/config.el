@@ -78,4 +78,6 @@
         lsp-ui-peek-fontify 'always
         lsp-ui-sideline-show-code-actions nil))
 
+(advice-add #'lsp-rename :after (lambda (&rest _) (projectile-save-project-buffers)))
+
 (load! "+bindings")
