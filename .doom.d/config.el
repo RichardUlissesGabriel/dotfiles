@@ -81,3 +81,28 @@
 (advice-add #'lsp-rename :after (lambda (&rest _) (projectile-save-project-buffers)))
 
 (load! "+bindings")
+(setq read-process-output-max (* 1024 1024)
+      doom-localleader-key "," ;; easier than <SPC m>
+      ;; doom-font (font-spec :family "JetBrainsMono Nerd Font Mono" :size 18) ;; Make sure to use a font you have installed
+      ;; doom-theme 'doom-dracula
+      projectile-project-search-path '("~/dev/nu")
+      projectile-enable-caching nil)
+
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
+
+(use-package! lsp-mode
+  :commands lsp
+  :config
+  (setq lsp-semantic-tokens-enable t)
+  (add-hook 'lsp-after-apply-edits-hook (lambda (&rest _) (save-buffer)))) ;; save buffers after renaming
+
+(let ((nudev-emacs-path "~/dev/nu/nudev/ides/emacs/"))
+  (when (file-directory-p nudev-emacs-path)
+    (add-to-list 'load-path nudev-emacs-path)
+    (require 'nu nil t)))
+(add-to-list 'projectile-project-search-path "~/dev/nu/mini-meta-repo/packages")
+
+(setq projectile-project-root-functions '(projectile-root-local
+                                          projectile-root-top-down
+                                          projectile-root-top-down-recurring
+                                          projectile-root-bottom-up))
